@@ -44,16 +44,45 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 1rem 2rem; gap: 1rem; flex-wrap: wrap;
     }
-    .logo { font-weight: 800; font-size: 0.9rem; background: linear-gradient(135deg, var(--primary), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo { 
+      font-weight: 800; 
+      font-size: 1.3rem; 
+      background: linear-gradient(135deg, var(--primary), var(--accent-cyan)); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      background-clip: text;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
     .nav-links a { text-decoration: none; color: inherit; font-size: 0.9rem; font-weight: 500; opacity: 0.8; transition: var(--transition); }
     .nav-links a:hover { opacity: 1; color: var(--primary); }
 
     #themeToggle {
-      background: none; border: none; cursor: pointer; font-size: 1.2rem;
-      padding: 0.4rem 0.6rem; border-radius: 8px; transition: var(--transition);
+      background: rgba(0, 102, 204, 0.15); 
+      border: 2px solid var(--primary);
+      cursor: pointer; 
+      font-size: 1.3rem;
+      padding: 0.5rem 0.8rem; 
+      border-radius: 8px; 
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    #themeToggle:hover { background: rgba(0, 102, 204, 0.12); }
+    #themeToggle:hover { 
+      background: rgba(0, 102, 204, 0.25);
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+      transform: scale(1.1);
+    }
+    body.dark-mode #themeToggle {
+      background: rgba(0, 168, 232, 0.15);
+      border-color: var(--accent-cyan);
+    }
+    body.dark-mode #themeToggle:hover {
+      background: rgba(0, 168, 232, 0.25);
+      box-shadow: 0 4px 12px rgba(0, 168, 232, 0.3);
+    }
 
     /* Hero */
     .hero {
@@ -191,9 +220,6 @@
       border: 1px solid rgba(0, 102, 204, 0.3);
     }
 
-    /* Chart Container */
-    .chart-container { max-width: 600px; margin: 2rem auto; }
-
     /* Contact Links */
     .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; font-size: 1.5rem; }
     .social-links a { color: white; transition: var(--transition); text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); }
@@ -215,6 +241,17 @@
 
     body.dark-mode section:nth-child(even) {
       background-color: rgba(0, 102, 204, 0.08);
+    }
+
+    /* Skill Progress Animation */
+    @keyframes slideIn {
+      from {
+        width: 0 !important;
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     @media (max-width: 768px) {
@@ -244,7 +281,7 @@
     <div class="hero-content">
       <span class="creds">MS DSA | BS IT | MCP | CCA | VCP</span>
       <h1>James Simelus</h1>
-      <p>Experienced Data Engineer and IT professional with 20+ years of expertise in data pipelines, server administration, and virtualization technologies.</p>
+      <p>Experienced Data Engineer and IT professional with 15+ years of expertise in data pipelines, server administration, and virtualization technologies.</p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
         <a href="#experience" class="btn btn-primary">View History</a>
         <a href="#contact" class="btn btn-outline">Get In Touch</a>
@@ -257,7 +294,7 @@
         <a href="https://github.com/jsimelus1" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <i class="fab fa-github"></i>
         </a>
-        <a href="mailto:jsimelus@me.com" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#a7cdd4cecac2cbd2d4e7cac289c4c8ca" aria-label="Email">
           <i class="fas fa-envelope"></i>
         </a>
         <a href="tel:+15736390614" aria-label="Phone">
@@ -375,18 +412,6 @@
         </div>
       </div>
     </div>
-
-    <style>
-      @keyframes slideIn {
-        from {
-          width: 0 !important;
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
 
     <div class="skills-grid">
       <div class="skill-card">
@@ -553,7 +578,7 @@
         I'm interested in Data Scientist and Data Engineering opportunities, Infrastructure Projects, and Innovative Data Solutions. Let's connect!
       </p>
       <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <a class="btn btn-primary" href="mailto:jsimelus@me.com">📧 Email Me</a>
+        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#2e445d47434b425b5d6e434b004d4143">📧 Email Me</a>
         <a class="btn btn-outline" href="https://www.linkedin.com/in/james-simelus" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
         <a class="btn btn-outline" href="https://github.com/jsimelus1" target="_blank" rel="noopener noreferrer">🐙 GitHub</a>
         <a class="btn btn-outline" href="tel:+15736390614">📱 Call Me</a>
@@ -571,11 +596,22 @@
 
     // Theme Toggle Logic
     const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    });
+    
+    // Check for saved theme preference on page load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      if (themeToggle) themeToggle.textContent = '☀️';
+    }
 
-    // Check for saved theme preference
-    const savedTheme = loca
+    // Add click event listener to theme toggle
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+      });
+    }
+  </script>
