@@ -14,10 +14,15 @@
     body{background:#060f1e;color:#f0e8d5;font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+        /* ── NAV ── */
     .nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(6,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #1e2e42}
     .nav-inner{max-width:1280px;margin:0 auto;padding:1.2rem 2.5rem;display:flex;align-items:center;gap:2rem}
+    /* desktop logo = JS. */
     .nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#f0e8d5;text-decoration:none;margin-right:auto;letter-spacing:.05em}
     .nav-logo span{color:#d4af37}
+    /* mobile logo = full name (hidden on desktop) */
+    .nav-logo-mobile{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:#f0e8d5;text-decoration:none;letter-spacing:.03em;display:none}
+    .nav-logo-mobile span{color:#d4af37}
     .nav-links{list-style:none;display:flex;gap:2.5rem}
     .nav-links a{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#6b8099;transition:color .25s;position:relative}
     .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#d4af37;transition:width .3s}
@@ -25,6 +30,31 @@
     .nav-links a:hover::after,.nav-links a.active::after{width:100%}
     .nav-cta{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#d4af37;border:1px solid #8a7020;padding:.5rem 1.2rem;border-radius:2px;transition:all .25s}
     .nav-cta:hover{background:#d4af37;color:#060f1e}
+    /* hamburger button */
+    .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:1100}
+    .nav-hamburger span{display:block;width:24px;height:2px;background:#f0e8d5;border-radius:2px;transition:all .3s ease}
+    .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    /* mobile drawer */
+    .nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:1050;flex-direction:column}
+    .nav-drawer.open{display:flex}
+    .nav-drawer-backdrop{position:absolute;inset:0;background:rgba(6,15,30,.85);backdrop-filter:blur(8px)}
+    .nav-drawer-panel{position:relative;z-index:1;margin-left:auto;width:72%;max-width:300px;height:100%;background:#0a1628;border-left:1px solid #1e2e42;padding:5rem 2rem 3rem;display:flex;flex-direction:column;gap:0;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+    .nav-drawer.open .nav-drawer-panel{transform:translateX(0)}
+    .nav-drawer-links{list-style:none;display:flex;flex-direction:column;gap:0}
+    .nav-drawer-links li{border-bottom:1px solid #141e2e}
+    .nav-drawer-links a{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:#6b8099;padding:1.2rem 0;display:block;transition:color .2s}
+    .nav-drawer-links a:hover,.nav-drawer-links a.active{color:#d4af37}
+    .nav-drawer-cta{margin-top:2rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;background:#d4af37;color:#060f1e;padding:.9rem 1.5rem;border-radius:2px;text-align:center;display:block;transition:all .25s}
+    .nav-drawer-cta:hover{background:#f0e8d5}
+    @media(max-width:900px){
+      .nav-logo{display:none}
+      .nav-logo-mobile{display:block;margin-right:auto}
+      .nav-links{display:none}
+      .nav-cta{display:none}
+      .nav-hamburger{display:flex}
+    }
     .btn-primary{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;background:#d4af37;color:#060f1e;padding:.9rem 2rem;border-radius:2px;border:none;cursor:pointer;display:inline-block;transition:all .25s;font-weight:500}
     .btn-primary:hover{background:#f0e8d5;transform:translateY(-2px)}
     .page-header{padding:10rem 5rem 5rem;border-bottom:1px solid #1e2e42;position:relative;overflow:hidden}
@@ -90,18 +120,37 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <a href="index.html" class="nav-logo-mobile">James <span>Simelus</span></a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
         <li><a href="experience.html">Experience</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
       <a href="contact.html" class="nav-cta">Let's Talk →</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <div class="nav-drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="nav-drawer-panel">
+      <ul class="nav-drawer-links" id="drawerLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-drawer-cta">Let's Talk →</a>
+    </div>
+  </div>
   <header class="page-header" data-title="Hello">
     <div class="page-eyebrow">05 / Contact</div>
     <h1 class="page-title">Get In <em>Touch</em></h1>
