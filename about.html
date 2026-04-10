@@ -7,233 +7,89 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="shared.css">
   <style>
-    /* ─── ABOUT LAYOUT ─────────────────────────── */
-    .about-body {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 5rem 5rem;
-    }
-
-    .about-intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 6rem;
-      align-items: start;
-      margin-bottom: 6rem;
-    }
-
-    .about-photo-wrap {
-      position: sticky;
-      top: 8rem;
-    }
-
-    .about-photo-frame {
-      position: relative;
-    }
-
-    .about-photo-frame img {
-      width: 100%;
-      display: block;
-      border-radius: 2px;
-      filter: grayscale(15%);
-    }
-
-    .about-photo-frame::after {
-      content: '';
-      position: absolute;
-      bottom: -1.5rem;
-      right: -1.5rem;
-      width: 60%;
-      height: 60%;
-      border: 2px solid var(--gold-dim);
-      border-radius: 2px;
-      pointer-events: none;
-    }
-
-    .about-photo-caption {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-mid);
-    }
-
-    .about-photo-caption h3 {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      color: var(--cream);
-      margin-bottom: 0.3rem;
-    }
-
-    .about-photo-caption p {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .about-photo-links {
-      display: flex;
-      gap: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .about-photo-links a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .about-photo-links a:hover { color: var(--gold); }
-
-    /* ─── NARRATIVE ─────────────────────────────── */
-    .about-narrative h2 {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-narrative h2 em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .about-narrative p {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      line-height: 1.85;
-      color: var(--muted-mid);
-      margin-bottom: 1.5rem;
-    }
-
-    .about-narrative p strong {
-      color: var(--cream);
-      font-weight: 500;
-    }
-
-    /* ─── ERA CARDS ─────────────────────────────── */
-    .era-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--border-mid);
-      margin: 3rem 0;
-    }
-
-    .era-card {
-      background: var(--navy-light);
-      padding: 2.5rem 2rem;
-    }
-
-    .era-card-period {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .era-card-title {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 0.8rem;
-    }
-
-    .era-card-desc {
-      font-family: var(--font-body);
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ─── EDUCATION ─────────────────────────────── */
-    .education-section {
-      border-top: 1px solid var(--border-mid);
-      padding-top: 5rem;
-      margin-top: 2rem;
-    }
-
-    .edu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .edu-card {
-      border: 1px solid var(--border-mid);
-      padding: 2.5rem;
-      border-radius: 2px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s ease;
-    }
-
-    .edu-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--gold);
-      transition: height 0.4s ease;
-    }
-
-    .edu-card:hover { border-color: var(--gold-dim); }
-    .edu-card:hover::before { height: 100%; }
-
-    .edu-degree {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--cream);
-      margin-bottom: 0.4rem;
-    }
-
-    .edu-school {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-    }
-
-    .edu-detail {
-      font-family: var(--font-body);
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .edu-gpa {
-      display: inline-block;
-      margin-top: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--gold-dim);
-      color: var(--gold);
-      border-radius: 2px;
-    }
-
-    @media (max-width: 900px) {
-      .about-body { padding: 3rem 2rem; }
-      .about-intro-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-photo-wrap { position: static; }
-      .era-cards { grid-template-columns: 1fr; }
-      .edu-grid { grid-template-columns: 1fr; }
+    :root{--navy:#060f1e;--navy-mid:#0a1628;--navy-light:#0f1e35;--gold:#d4af37;--gold-dim:#8a7020;--cream:#f0e8d5;--muted:#6b8099;--muted-mid:#8fa0b0;--border:#141e2e;--border-mid:#1e2e42}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:#060f1e;color:#f0e8d5;font-family:'DM Sans',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(6,15,30,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #1e2e42}
+    .nav-inner{max-width:1280px;margin:0 auto;padding:1.2rem 2.5rem;display:flex;align-items:center;gap:2rem}
+    .nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:#f0e8d5;text-decoration:none;margin-right:auto;letter-spacing:.05em}
+    .nav-logo span{color:#d4af37}
+    .nav-links{list-style:none;display:flex;gap:2.5rem}
+    .nav-links a{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#6b8099;transition:color .25s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#d4af37;transition:width .3s}
+    .nav-links a:hover,.nav-links a.active{color:#f0e8d5}
+    .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+    .nav-cta{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#d4af37;border:1px solid #8a7020;padding:.5rem 1.2rem;border-radius:2px;transition:all .25s}
+    .nav-cta:hover{background:#d4af37;color:#060f1e}
+    .btn-primary{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;background:#d4af37;color:#060f1e;padding:.9rem 2rem;border-radius:2px;border:none;cursor:pointer;display:inline-block;transition:all .25s;font-weight:500}
+    .btn-primary:hover{background:#f0e8d5;transform:translateY(-2px)}
+    .btn-ghost{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;background:transparent;color:#f0e8d5;padding:.9rem 2rem;border-radius:2px;border:1px solid #1e2e42;display:inline-block;transition:all .25s}
+    .btn-ghost:hover{border-color:#8a7020;color:#d4af37}
+    .page-header{padding:10rem 5rem 5rem;border-bottom:1px solid #1e2e42;position:relative;overflow:hidden}
+    .page-header::before{content:attr(data-title);position:absolute;right:4rem;top:50%;transform:translateY(-50%);font-family:'Playfair Display',serif;font-size:14rem;font-weight:900;color:#141e2e;line-height:1;pointer-events:none;user-select:none;white-space:nowrap}
+    .page-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.3em;color:#d4af37;text-transform:uppercase;margin-bottom:1rem;opacity:0;animation:fadeUp .7s ease forwards .2s}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,5rem);font-weight:900;color:#f0e8d5;line-height:1;opacity:0;animation:fadeUp .7s ease forwards .4s}
+    .page-title em{font-style:italic;color:#d4af37}
+    .page-subtitle{font-size:1rem;color:#6b8099;max-width:500px;line-height:1.7;margin-top:1.5rem;opacity:0;animation:fadeUp .7s ease forwards .6s}
+    .section-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.3em;color:#d4af37;text-transform:uppercase;margin-bottom:.8rem}
+    .footer{border-top:1px solid #1e2e42;padding:4rem 5rem 2rem;background:#0a1628}
+    .footer-inner{max-width:1280px;margin:0 auto 3rem;display:flex;justify-content:space-between;align-items:flex-start;gap:3rem;flex-wrap:wrap}
+    .footer-left p{font-size:.85rem;color:#6b8099;line-height:1.6}
+    .footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+    .footer-links a{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;color:#6b8099;transition:color .2s}
+    .footer-links a:hover{color:#d4af37}
+    .footer-social{display:flex;gap:1.2rem;font-size:1.1rem}
+    .footer-social a{color:#6b8099;text-decoration:none;transition:color .2s}
+    .footer-social a:hover{color:#d4af37}
+    .footer-copy{text-align:center;font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:#6b8099;padding-top:2rem;border-top:1px solid #141e2e;max-width:1280px;margin:0 auto}
+    /* ABOUT PAGE */
+    .about-body{max-width:1280px;margin:0 auto;padding:5rem}
+    .about-intro-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start;margin-bottom:6rem}
+    .about-photo-wrap{position:sticky;top:8rem}
+    .about-photo-frame{position:relative;margin-bottom:2rem}
+    .about-photo-frame img{width:100%;display:block;border-radius:2px;filter:grayscale(15%)}
+    .about-photo-frame::after{content:'';position:absolute;bottom:-1.5rem;right:-1.5rem;width:60%;height:60%;border:2px solid #8a7020;border-radius:2px;pointer-events:none}
+    .about-photo-caption{padding-top:1.5rem;border-top:1px solid #1e2e42}
+    .about-photo-caption h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:#f0e8d5;margin-bottom:.3rem}
+    .about-photo-caption p{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:#d4af37;margin-bottom:1rem;text-transform:uppercase}
+    .about-photo-links{display:flex;gap:1rem;font-size:1.1rem}
+    .about-photo-links a{color:#6b8099;text-decoration:none;transition:color .2s}
+    .about-photo-links a:hover{color:#d4af37}
+    .about-narrative h2{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#f0e8d5;margin-bottom:1.5rem}
+    .about-narrative h2 em{font-style:italic;color:#d4af37}
+    .about-narrative p{font-size:1rem;line-height:1.85;color:#8fa0b0;margin-bottom:1.5rem}
+    .about-narrative p strong{color:#f0e8d5;font-weight:500}
+    .era-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:#1e2e42;margin:3rem 0}
+    .era-card{background:#0f1e35;padding:2.5rem 2rem}
+    .era-card-period{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.2em;color:#d4af37;text-transform:uppercase;margin-bottom:1rem}
+    .era-card-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:#f0e8d5;margin-bottom:.8rem}
+    .era-card-desc{font-size:.88rem;color:#6b8099;line-height:1.7}
+    .education-section{border-top:1px solid #1e2e42;padding-top:5rem;margin-top:2rem}
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem}
+    .edu-card{border:1px solid #1e2e42;padding:2.5rem;border-radius:2px;position:relative;overflow:hidden;transition:border-color .3s}
+    .edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:#d4af37;transition:height .4s}
+    .edu-card:hover{border-color:#8a7020}
+    .edu-card:hover::before{height:100%}
+    .edu-degree{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#f0e8d5;margin-bottom:.4rem}
+    .edu-school{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;color:#d4af37;margin-bottom:.8rem;text-transform:uppercase}
+    .edu-detail{font-size:.88rem;color:#6b8099}
+    .edu-gpa{display:inline-block;margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid #8a7020;color:#d4af37;border-radius:2px}
+    @media(max-width:900px){
+      .about-body{padding:3rem 2rem}
+      .about-intro-grid{grid-template-columns:1fr;gap:3rem}
+      .about-photo-wrap{position:static}
+      .era-cards{grid-template-columns:1fr}
+      .edu-grid{grid-template-columns:1fr}
+      .nav-links{display:none}.nav-cta{display:none}
+      .page-header{padding:8rem 2rem 4rem}.page-header::before{display:none}
+      .footer{padding:3rem 2rem}.footer-inner{flex-direction:column;gap:2rem}
     }
   </style>
 </head>
 <body>
-
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">JS<span>.</span></a>
@@ -257,8 +113,6 @@
 
   <main class="about-body">
     <div class="about-intro-grid">
-
-      <!-- LEFT: Photo + quick info -->
       <div class="about-photo-wrap">
         <div class="about-photo-frame">
           <img src="headshot.jpg" alt="James Simelus">
@@ -274,89 +128,42 @@
           </div>
         </div>
       </div>
-
-      <!-- RIGHT: Narrative -->
       <div class="about-narrative">
         <div class="section-label">Professional Profile</div>
         <h2>Infrastructure Depth.<br><em>Data Ambition.</em></h2>
-
         <p>I'm a Data Engineer and IT professional with over <strong>20 years of progressive experience</strong> designing, implementing, and optimizing enterprise-scale infrastructure and data solutions. My career represents a strategic evolution — transitioning from foundational systems administration into cutting-edge data engineering, creating a unique bridge between operational excellence and data-driven innovation.</p>
-
         <p>My distinctive career trajectory, combining deep infrastructure knowledge with modern data engineering skills and formal data science education, allows me to architect solutions that are not only technically sound but <strong>operationally sustainable</strong>. I'm passionate about leveraging technology to transform raw data into strategic business insights.</p>
-
         <p>In the near future, I plan to pursue a Doctorate degree — likely in Health Informatics or GIS — continuing a lifelong commitment to academic excellence and applied research.</p>
-
         <div class="era-cards">
-          <div class="era-card">
-            <div class="era-card-period">2005 – 2013</div>
-            <div class="era-card-title">Early Foundation</div>
-            <div class="era-card-desc">Infrastructure management, network administration, enterprise architecture, and VMware virtualization at IBM.</div>
+          <div class="era-card"><div class="era-card-period">2005 – 2013</div><div class="era-card-title">Early Foundation</div><div class="era-card-desc">Infrastructure management, network administration, enterprise architecture, and VMware virtualization at IBM.</div></div>
+          <div class="era-card"><div class="era-card-period">2013 – 2021</div><div class="era-card-title">Infrastructure Leadership</div><div class="era-card-desc">Enterprise virtualization design, automated provisioning, security hardening, and disaster recovery at IBM and Veterans United.</div></div>
+          <div class="era-card"><div class="era-card-period">2021 – Present</div><div class="era-card-title">Data Engineering</div><div class="era-card-desc">Scalable ETL pipelines, SSIS data marts, SQL optimization, automated testing, and data governance at Veterans United.</div></div>
+        </div>
+        <p>My systems administration background provides invaluable context for building robust, scalable data pipelines. I design and implement enterprise-scale ETL processes using SSIS, sophisticated pipelines connecting multiple enterprise systems, data warehouse architecture aligned with business requirements, and advanced SQL optimization with complex stored procedures.</p>
+        <div class="education-section">
+          <div class="section-label">Academic Background</div>
+          <h2 style="font-size:2rem;margin-top:.5rem">Education &amp; <em>Credentials</em></h2>
+          <div class="edu-grid">
+            <div class="edu-card"><div class="edu-degree">M.S. Data Science &amp; Analytics</div><div class="edu-school">University of Missouri · May 2025</div><div class="edu-detail">Advanced machine learning, statistical modeling, big data technologies, distributed systems, data visualization, and cloud computing platforms.</div><div class="edu-gpa">GPA 3.94 / 4.0</div></div>
+            <div class="edu-card"><div class="edu-degree">B.S. Information Technology</div><div class="edu-school">American Intercontinental University · 2004</div><div class="edu-detail">Foundation in systems administration, network infrastructure, and enterprise IT architecture.</div><div class="edu-gpa">GPA 3.14 / 4.0</div></div>
           </div>
-          <div class="era-card">
-            <div class="era-card-period">2013 – 2021</div>
-            <div class="era-card-title">Infrastructure Leadership</div>
-            <div class="era-card-desc">Enterprise virtualization design, automated provisioning, security hardening, and disaster recovery at IBM and Veterans United.</div>
-          </div>
-          <div class="era-card">
-            <div class="era-card-period">2021 – Present</div>
-            <div class="era-card-title">Data Engineering</div>
-            <div class="era-card-desc">Scalable ETL pipelines, SSIS data marts, SQL optimization, automated testing, and data governance at Veterans United.</div>
+          <div style="margin-top:3rem;display:flex;gap:1.5rem;flex-wrap:wrap">
+            <a href="skills.html" class="btn-primary">View My Skills →</a>
+            <a href="experience.html" class="btn-ghost">See My Career</a>
           </div>
         </div>
-
-        <p>My systems administration background provides invaluable context for building robust, scalable data pipelines. I now design and implement enterprise-scale ETL processes using SQL Server Integration Services (SSIS), sophisticated pipelines connecting multiple enterprise systems, data warehouse and data mart architecture aligned with business requirements, and advanced SQL optimization with complex stored procedures.</p>
-      </div>
-    </div>
-
-    <!-- EDUCATION -->
-    <div class="education-section">
-      <div class="section-label">Academic Background</div>
-      <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--cream); margin-top: 0.5rem;">Education &amp; <em style="font-style:italic; color:var(--gold);">Credentials</em></h2>
-
-      <div class="edu-grid">
-        <div class="edu-card">
-          <div class="edu-degree">M.S. Data Science &amp; Analytics</div>
-          <div class="edu-school">University of Missouri · May 2025</div>
-          <div class="edu-detail">Advanced machine learning, statistical modeling, big data technologies, distributed systems, data visualization, and cloud computing platforms.</div>
-          <div class="edu-gpa">GPA 3.94 / 4.0</div>
-        </div>
-        <div class="edu-card">
-          <div class="edu-degree">B.S. Information Technology</div>
-          <div class="edu-school">American Intercontinental University · 2004</div>
-          <div class="edu-detail">Foundation in systems administration, network infrastructure, and enterprise IT architecture.</div>
-          <div class="edu-gpa">GPA 3.14 / 4.0</div>
-        </div>
-      </div>
-
-      <div style="margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
-        <a href="skills.html" class="btn-primary">View My Skills →</a>
-        <a href="experience.html" class="btn-ghost">See My Career</a>
       </div>
     </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-left">
-        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
-        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
-      </div>
-      <div class="footer-links">
-        <a href="about.html">About</a>
-        <a href="skills.html">Skills</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="experience.html">Experience</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
-      </div>
+      <div class="footer-left"><a href="index.html" class="nav-logo" style="display:block;margin-bottom:.5rem">JS<span>.</span></a><p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p></div>
+      <div class="footer-links"><a href="about.html">About</a><a href="skills.html">Skills</a><a href="portfolio.html">Portfolio</a><a href="experience.html">Experience</a><a href="contact.html">Contact</a></div>
+      <div class="footer-social"><a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a><a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a><a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a></div>
     </div>
     <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
   </footer>
-
-  <script src="shared.js"></script>
+  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
 </body>
 </html>
