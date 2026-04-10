@@ -138,15 +138,25 @@
       <div class="contact-form-wrap">
         <h3>Send a Message</h3>
         <p>I typically respond within 24 hours.</p>
-        <form action="mailto:jsimelus@me.com" method="POST" enctype="text/plain">
+        <form id="contact-form">
+          <!-- Web3Forms access key -->
+          <input type="hidden" name="access_key" value="dd1c74af-2f75-439e-941b-407ea3f4d95a">
+          <input type="hidden" name="subject" value="New Portfolio Contact Message">
+          <input type="hidden" name="from_name" value="James Simelus Portfolio">
+          <!-- Honeypot spam trap -->
+          <input type="checkbox" name="botcheck" style="display:none">
+
           <div class="form-row">
-            <div class="form-group"><label class="form-label" for="fname">First Name</label><input class="form-input" type="text" id="fname" name="First Name" placeholder="Jane"></div>
-            <div class="form-group"><label class="form-label" for="lname">Last Name</label><input class="form-input" type="text" id="lname" name="Last Name" placeholder="Smith"></div>
+            <div class="form-group"><label class="form-label" for="fname">First Name</label><input class="form-input" type="text" id="fname" name="firstName" placeholder="Jane" required></div>
+            <div class="form-group"><label class="form-label" for="lname">Last Name</label><input class="form-input" type="text" id="lname" name="lastName" placeholder="Smith" required></div>
           </div>
-          <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" name="Email" placeholder="jane@company.com"></div>
-          <div class="form-group"><label class="form-label" for="subject">Subject</label><input class="form-input" type="text" id="subject" name="Subject" placeholder="Data Engineering Opportunity"></div>
-          <div class="form-group"><label class="form-label" for="message">Message</label><textarea class="form-textarea" id="message" name="Message" placeholder="Tell me about your project or opportunity..."></textarea></div>
-          <div style="margin-top:1.5rem"><button type="submit" class="btn-primary">Send Message →</button></div>
+          <div class="form-group"><label class="form-label" for="email">Email Address</label><input class="form-input" type="email" id="email" name="email" placeholder="jane@company.com" required></div>
+          <div class="form-group"><label class="form-label" for="subject">Subject</label><input class="form-input" type="text" id="subject" name="subject" placeholder="Data Engineering Opportunity"></div>
+          <div class="form-group"><label class="form-label" for="message">Message</label><textarea class="form-textarea" id="message" name="message" placeholder="Tell me about your project or opportunity..." required></textarea></div>
+          <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+            <button type="submit" class="btn-primary" id="submit-btn">Send Message →</button>
+            <span id="form-status" style="font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.1em;display:none"></span>
+          </div>
         </form>
       </div>
     </div>
@@ -160,6 +170,44 @@
     </div>
     <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
   </footer>
-  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn    = document.getElementById('submit-btn');
+      const status = document.getElementById('form-status');
+
+      btn.textContent   = 'Sending...';
+      btn.style.opacity = '0.7';
+      btn.disabled      = true;
+      status.style.display = 'none';
+
+      try {
+        const res    = await fetch('https://api.web3forms.com/submit', {
+          method : 'POST',
+          body   : new FormData(this)
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          status.textContent   = '✓ Message sent — I\'ll be in touch soon!';
+          status.style.color   = '#4ade80';
+          status.style.display = 'inline';
+          this.reset();
+        } else {
+          throw new Error(result.message);
+        }
+      } catch (err) {
+        status.textContent   = '✗ Something went wrong. Email me at jsimelus@me.com';
+        status.style.color   = '#f87171';
+        status.style.display = 'inline';
+      }
+
+      btn.textContent   = 'Send Message →';
+      btn.style.opacity = '1';
+      btn.disabled      = false;
+    });
+  </script>
 </body>
 </html>
