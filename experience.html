@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience — James Simelus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .experience-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem;
+    }
+
+    /* ─── TIMELINE ─────────────────────────────── */
+    .timeline-wrap {
+      display: grid;
+      grid-template-columns: 200px 1px 1fr;
+      gap: 0 3rem;
+      align-items: start;
+    }
+
+    .tl-spacer { height: 100%; }
+
+    .tl-line-col {
+      position: relative;
+    }
+
+    .tl-line-col::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--gold-dim), var(--border-mid));
+    }
+
+    .tl-entries { display: flex; flex-direction: column; gap: 0; }
+
+    .tl-entry {
+      display: contents;
+    }
+
+    .tl-date-cell {
+      padding: 3rem 0 3rem;
+      text-align: right;
+    }
+
+    .tl-date-text {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .tl-dot-cell {
+      position: relative;
+      padding: 3rem 0;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -6px;
+      top: 3.8rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--gold-dim);
+      border: 2px solid var(--navy);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .tl-entry:hover .tl-dot {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    .tl-content-cell {
+      padding: 3rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tl-entry:last-child .tl-content-cell {
+      border-bottom: none;
+    }
+
+    .tl-role {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .tl-company {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .tl-desc {
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    .tl-bullets {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .tl-bullet {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+      display: flex;
+      gap: 0.8rem;
+      align-items: flex-start;
+    }
+
+    .tl-bullet::before {
+      content: '—';
+      color: var(--gold-dim);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* ─── SIDEBAR SUMMARY ──────────────────────── */
+    .exp-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .exp-sidebar {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .sidebar-card {
+      border: 1px solid var(--border-mid);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .sidebar-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-stat:last-child { border-bottom: none; }
+
+    .sidebar-stat-label {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .sidebar-stat-value {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--cream);
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 1100px) {
+      .exp-layout { grid-template-columns: 1fr; }
+      .exp-sidebar { position: static; }
+    }
+
+    @media (max-width: 900px) {
+      .experience-body { padding: 3rem 2rem; }
+      .timeline-wrap { grid-template-columns: 1fr; }
+      .tl-date-cell { text-align: left; padding: 2rem 0 0.5rem; }
+      .tl-dot-cell { display: none; }
+      .tl-content-cell { padding: 0 0 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="experience.html" class="active">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <header class="page-header" data-title="Career">
+    <div class="page-eyebrow">04 / Experience</div>
+    <h1 class="page-title">Career <em>Timeline</em></h1>
+    <p class="page-subtitle">Over two decades of progressive roles across enterprise infrastructure and data engineering.</p>
+  </header>
+
+  <main class="experience-body">
+    <div class="exp-layout">
+
+      <!-- TIMELINE -->
+      <div>
+        <div class="section-label" style="margin-bottom: 2.5rem;">Work History</div>
+
+        <!-- Grid-based timeline -->
+        <div style="display: grid; grid-template-columns: 180px 1px 1fr; gap: 0 2.5rem;">
+
+          <!-- Veterans United / Data Engineer -->
+          <div style="padding: 0 0 3rem; text-align: right;">
+            <div class="tl-date-text">July 2024<br>– Present</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold-dim) 0%, var(--border-mid) 100%);"></div>
+          </div>
+          <div style="padding: 0 0 3rem; border-bottom: 1px solid var(--border);">
+            <div class="tl-role">Data Engineer</div>
+            <div class="tl-company">Veterans United · Columbia, MO</div>
+            <div class="tl-desc">Designing and implementing enterprise-scale data infrastructure to power business intelligence and reporting.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Designed scalable data pipelines and data marts using SSIS and SQL Agent jobs</div>
+              <div class="tl-bullet">Led optimization initiatives for data delivery systems improving query performance</div>
+              <div class="tl-bullet">Implemented automated testing systems ensuring data integrity across pipelines</div>
+              <div class="tl-bullet">Contributing to data governance initiatives and standards development</div>
+            </div>
+          </div>
+
+          <!-- Veterans United / Server Admin -->
+          <div style="padding: 0 0 3rem; text-align: right;">
+            <div class="tl-date-text">April 2021<br>– July 2024</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--gold-dim); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold-dim) 0%, var(--border-mid) 100%);"></div>
+          </div>
+          <div style="padding: 0 0 3rem; border-bottom: 1px solid var(--border);">
+            <div class="tl-role">Windows Server Administrator</div>
+            <div class="tl-company">Veterans United · Columbia, MO</div>
+            <div class="tl-desc">Enterprise Windows environments managed with an exceptional uptime record and proactive security posture.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Administered enterprise Windows environments maintaining 99.9% uptime</div>
+              <div class="tl-bullet">Implemented security measures and automated routine maintenance — 30% reduction in manual workload</div>
+              <div class="tl-bullet">Conducted monthly OS patching and quarterly hardware firmware updates</div>
+              <div class="tl-bullet">Managed VMware Horizon VDI infrastructure across multiple sites</div>
+            </div>
+          </div>
+
+          <!-- IBM / VMware Specialist -->
+          <div style="padding: 0 0 3rem; text-align: right;">
+            <div class="tl-date-text">May 2013<br>– April 2021</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--gold-dim); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold-dim) 0%, var(--border-mid) 100%);"></div>
+          </div>
+          <div style="padding: 0 0 3rem; border-bottom: 1px solid var(--border);">
+            <div class="tl-role">VMware Infrastructure Specialist</div>
+            <div class="tl-company">IBM · Columbia, MO</div>
+            <div class="tl-desc">Core architect of VMware virtualization environments supporting large enterprise clientele.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Designed and maintained VMware virtualization environments supporting thousands of VMs</div>
+              <div class="tl-bullet">Managed cloud storage, backup systems, and high availability solutions</div>
+              <div class="tl-bullet">Implemented VMware best practices for enterprise deployment</div>
+              <div class="tl-bullet">Supported production environment upgrades and migrations</div>
+            </div>
+          </div>
+
+          <!-- IBM / PureFlex -->
+          <div style="padding: 0 0 3rem; text-align: right;">
+            <div class="tl-date-text">Oct 2011<br>– May 2013</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--gold-dim); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold-dim) 0%, var(--border-mid) 100%);"></div>
+          </div>
+          <div style="padding: 0 0 3rem; border-bottom: 1px solid var(--border);">
+            <div class="tl-role">Server Administrator / PureFlex Network SME</div>
+            <div class="tl-company">IBM · Columbia, MO</div>
+            <div class="tl-desc">Subject matter expert for IBM PureFlex Converged Systems with full infrastructure scope.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Configured and supported IBM PureFlex Converged Systems</div>
+              <div class="tl-bullet">Maintained Active Directory infrastructure and built physical and virtual servers</div>
+              <div class="tl-bullet">Collaborated on SAN storage configuration and enterprise architecture design</div>
+            </div>
+          </div>
+
+          <!-- C&C International -->
+          <div style="padding: 0 0 3rem; text-align: right;">
+            <div class="tl-date-text">Aug 2005<br>– Oct 2011</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--gold-dim); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold-dim) 0%, var(--border-mid) 100%);"></div>
+          </div>
+          <div style="padding: 0 0 3rem; border-bottom: 1px solid var(--border);">
+            <div class="tl-role">Field Engineer</div>
+            <div class="tl-company">C&amp;C International Computers</div>
+            <div class="tl-desc">End-to-end field engineering covering systems, networks, and security infrastructure.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Troubleshot and repaired computer systems and installed desktop/laptop infrastructure</div>
+              <div class="tl-bullet">Implemented security structures and maintained network infrastructure</div>
+              <div class="tl-bullet">Managed firewalls and intrusion detection systems</div>
+            </div>
+          </div>
+
+          <!-- Vitec -->
+          <div style="padding: 0 0 0; text-align: right;">
+            <div class="tl-date-text">Dec 2003<br>– Nov 2007</div>
+          </div>
+          <div style="position: relative;">
+            <div style="position: absolute; left: -6px; top: 0.4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--border-mid); border: 2px solid var(--navy); z-index:1;"></div>
+            <div style="position: absolute; top: 0; left: 0; width: 1px; height: 40%; background: var(--border-mid);"></div>
+          </div>
+          <div style="padding: 0 0 0;">
+            <div class="tl-role">Web Designer / Network Administrator</div>
+            <div class="tl-company">Vitec Consulting Group</div>
+            <div class="tl-desc">Broad technical scope combining web development, network administration, and instruction.</div>
+            <div class="tl-bullets">
+              <div class="tl-bullet">Designed and developed client websites</div>
+              <div class="tl-bullet">Implemented and maintained Windows server-based networks</div>
+              <div class="tl-bullet">Configured Active Directory and instructed courses in computer fundamentals and network administration</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="exp-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Career Summary</div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">Total Experience</span>
+            <span class="sidebar-stat-value">20+ years</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">Current Role</span>
+            <span class="sidebar-stat-value">Data Engineer</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">Current Employer</span>
+            <span class="sidebar-stat-value">Veterans United</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">Location</span>
+            <span class="sidebar-stat-value">Columbia, MO</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Certifications</div>
+          <div class="sidebar-stat"><span class="sidebar-stat-label">MCP</span><span class="sidebar-stat-value" style="color: var(--gold);">✓</span></div>
+          <div class="sidebar-stat"><span class="sidebar-stat-label">CCA</span><span class="sidebar-stat-value" style="color: var(--gold);">✓</span></div>
+          <div class="sidebar-stat"><span class="sidebar-stat-label">VCP</span><span class="sidebar-stat-value" style="color: var(--gold);">✓</span></div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Education</div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">MS Data Science</span>
+            <span class="sidebar-stat-value">Mizzou '25</span>
+          </div>
+          <div class="sidebar-stat">
+            <span class="sidebar-stat-label">BS Information Tech</span>
+            <span class="sidebar-stat-value">AIU '04</span>
+          </div>
+        </div>
+
+        <a href="contact.html" class="btn-primary" style="width: 100%; text-align: center; display: block;">Contact Me →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
+        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

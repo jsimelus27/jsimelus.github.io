@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — James Simelus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .skills-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem;
+    }
+
+    /* ─── PROFICIENCY BARS ─────────────────────── */
+    .proficiency-section {
+      margin-bottom: 6rem;
+    }
+
+    .prof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 5rem;
+      margin-top: 3rem;
+    }
+
+    .prof-item {}
+
+    .prof-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.8rem;
+    }
+
+    .prof-name {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .prof-pct {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    .prof-track {
+      width: 100%;
+      height: 2px;
+      background: var(--border-mid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prof-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .prof-fill.animated {
+      transform: scaleX(1);
+    }
+
+    /* ─── SKILL CATEGORIES ─────────────────────── */
+    .categories-section {
+      border-top: 1px solid var(--border-mid);
+      padding-top: 5rem;
+      margin-bottom: 5rem;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border-mid);
+      margin-top: 3rem;
+    }
+
+    .cat-card {
+      background: var(--navy-light);
+      padding: 3rem 2.5rem;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+
+    .cat-card:hover { background: var(--navy); }
+    .cat-card:hover::after { width: 100%; }
+
+    .cat-icon {
+      font-size: 1.8rem;
+      color: var(--gold-dim);
+      margin-bottom: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .cat-card:hover .cat-icon { color: var(--gold); }
+
+    .cat-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+
+    .cat-desc {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .cat-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .cat-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border-mid);
+      color: var(--muted-mid);
+      border-radius: 2px;
+    }
+
+    /* ─── TECH STACK ───────────────────────────── */
+    .stack-section {
+      border-top: 1px solid var(--border-mid);
+      padding-top: 5rem;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 3rem;
+    }
+
+    .stack-item {
+      background: var(--navy-mid);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      transition: background 0.25s ease;
+    }
+
+    .stack-item:hover { background: var(--navy-light); }
+
+    .stack-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .stack-name {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--muted-mid);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .skills-body { padding: 3rem 2rem; }
+      .prof-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html" class="active">Skills</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <header class="page-header" data-title="Skills">
+    <div class="page-eyebrow">02 / Skills</div>
+    <h1 class="page-title">Expertise &amp; <em>Proficiency</em></h1>
+    <p class="page-subtitle">A full-stack of technical capability — from bare-metal infrastructure to production-grade data pipelines.</p>
+  </header>
+
+  <main class="skills-body">
+
+    <!-- PROFICIENCY BARS -->
+    <section class="proficiency-section">
+      <div class="section-label">Proficiency</div>
+      <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--cream); margin-top: 0.5rem; margin-bottom: 0;">By the <em style="font-style:italic; color:var(--gold);">Numbers</em></h2>
+
+      <div class="prof-grid" id="profGrid">
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Data Engineering</span><span class="prof-pct">95%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.95"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Cloud &amp; Infrastructure</span><span class="prof-pct">98%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.98"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">SQL &amp; Database Design</span><span class="prof-pct">92%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.92"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Python &amp; R Programming</span><span class="prof-pct">88%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.88"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Machine Learning &amp; Analytics</span><span class="prof-pct">85%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.85"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Cybersecurity &amp; Hardening</span><span class="prof-pct">80%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.80"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">PowerShell &amp; Automation</span><span class="prof-pct">93%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.93"></div></div>
+        </div>
+        <div class="prof-item">
+          <div class="prof-header"><span class="prof-name">Business Intelligence</span><span class="prof-pct">82%</span></div>
+          <div class="prof-track"><div class="prof-fill" style="--w: 0.82"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-section">
+      <div class="section-label">Categories</div>
+      <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--cream); margin-top: 0.5rem; margin-bottom: 0;">Core <em style="font-style:italic; color:var(--gold);">Domains</em></h2>
+
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-database"></i></div>
+          <div class="cat-title">Data Engineering</div>
+          <div class="cat-desc">ETL processes, data pipelines, data warehousing, and modeling to deliver scalable enterprise solutions.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">SSIS</span>
+            <span class="cat-tag">SQL Server</span>
+            <span class="cat-tag">Oracle</span>
+            <span class="cat-tag">ETL/ELT</span>
+            <span class="cat-tag">Data Marts</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-server"></i></div>
+          <div class="cat-title">Infrastructure &amp; Cloud</div>
+          <div class="cat-desc">VMware, ESXi, vSphere, AWS, Hyper-V, Kubernetes, Windows Server, and enterprise architecture design.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">VMware</span>
+            <span class="cat-tag">AWS</span>
+            <span class="cat-tag">Kubernetes</span>
+            <span class="cat-tag">Hyper-V</span>
+            <span class="cat-tag">ESXi</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-code"></i></div>
+          <div class="cat-title">Analytics &amp; Development</div>
+          <div class="cat-desc">Python, R, machine learning, advanced statistical modeling, data visualization, and business intelligence.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">Python</span>
+            <span class="cat-tag">R</span>
+            <span class="cat-tag">Pandas</span>
+            <span class="cat-tag">Scikit-learn</span>
+            <span class="cat-tag">Tableau</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="cat-title">Enterprise Systems</div>
+          <div class="cat-desc">Active Directory, network infrastructure, security hardening, disaster recovery, and systems architecture.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">Active Directory</span>
+            <span class="cat-tag">GPO</span>
+            <span class="cat-tag">SCCM</span>
+            <span class="cat-tag">DR Planning</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-gears"></i></div>
+          <div class="cat-title">DevOps &amp; Automation</div>
+          <div class="cat-desc">PowerShell scripting, automation frameworks, CI/CD pipelines, and performance optimization.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">PowerShell</span>
+            <span class="cat-tag">CI/CD</span>
+            <span class="cat-tag">Scripting</span>
+            <span class="cat-tag">Git</span>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="cat-title">Business Intelligence</div>
+          <div class="cat-desc">Data governance, data standards, technical documentation, and knowledge management best practices.</div>
+          <div class="cat-tags">
+            <span class="cat-tag">Data Governance</span>
+            <span class="cat-tag">BI Reporting</span>
+            <span class="cat-tag">KPIs</span>
+            <span class="cat-tag">Dashboards</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section class="stack-section">
+      <div class="section-label">Tools &amp; Platforms</div>
+      <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--cream); margin-top: 0.5rem; margin-bottom: 0;">Tech <em style="font-style:italic; color:var(--gold);">Stack</em></h2>
+
+      <div class="stack-grid">
+        <div class="stack-item"><span class="stack-icon">🗄️</span><div class="stack-name">SQL Server</div></div>
+        <div class="stack-item"><span class="stack-icon">🐍</span><div class="stack-name">Python</div></div>
+        <div class="stack-item"><span class="stack-icon">📊</span><div class="stack-name">SSIS</div></div>
+        <div class="stack-item"><span class="stack-icon">☁️</span><div class="stack-name">VMware</div></div>
+        <div class="stack-item"><span class="stack-icon">🔷</span><div class="stack-name">PowerShell</div></div>
+        <div class="stack-item"><span class="stack-icon">🐘</span><div class="stack-name">Oracle DB</div></div>
+        <div class="stack-item"><span class="stack-icon">📈</span><div class="stack-name">R / RStudio</div></div>
+        <div class="stack-item"><span class="stack-icon">🌐</span><div class="stack-name">AWS</div></div>
+        <div class="stack-item"><span class="stack-icon">🗂️</span><div class="stack-name">Active Directory</div></div>
+        <div class="stack-item"><span class="stack-icon">🐳</span><div class="stack-name">Kubernetes</div></div>
+        <div class="stack-item"><span class="stack-icon">🧠</span><div class="stack-name">Machine Learning</div></div>
+        <div class="stack-item"><span class="stack-icon">🔐</span><div class="stack-name">SCCM</div></div>
+      </div>
+
+      <div style="margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <a href="portfolio.html" class="btn-primary">See My Projects →</a>
+        <a href="experience.html" class="btn-ghost">View Career History</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
+        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    // Animate proficiency bars on scroll
+    const fills = document.querySelectorAll('.prof-fill');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const fill = e.target;
+          const w = getComputedStyle(fill).getPropertyValue('--w') || 0.8;
+          fill.style.transform = `scaleX(${parseFloat(w)})`;
+          fill.classList.add('animated');
+        }
+      });
+    }, { threshold: 0.3 });
+    fills.forEach(f => obs.observe(f));
+  </script>
+</body>
+</html>

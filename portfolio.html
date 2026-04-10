@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — James Simelus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .portfolio-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem;
+    }
+
+    /* ─── FEATURED PROJECT ─────────────────────── */
+    .featured-project {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border-mid);
+      margin-bottom: 1.5px;
+      overflow: hidden;
+    }
+
+    .featured-project-visual {
+      background: linear-gradient(135deg, #0a1628 0%, #0f2040 50%, #0a3060 100%);
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-project-visual::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      opacity: 0.2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .featured-project-visual::after {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 1px solid var(--gold-dim);
+      border-radius: 50%;
+      opacity: 0.3;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .featured-project-icon {
+      font-size: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .featured-project-content {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--navy-light);
+    }
+
+    .proj-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      border: 1px solid var(--gold-dim);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .featured-project-content h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .featured-project-content p {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .proj-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .proj-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border-mid);
+      color: var(--muted-mid);
+      border-radius: 2px;
+    }
+
+    /* ─── PROJECT GRID ─────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border-mid);
+      margin-top: 1.5px;
+    }
+
+    .project-card {
+      background: var(--navy-mid);
+      padding: 2.5rem;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.4s ease;
+    }
+
+    .project-card:hover { background: var(--navy-light); }
+    .project-card:hover::before { width: 100%; }
+
+    .project-card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .project-card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+
+    .project-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ─── STATS ROW ────────────────────────────── */
+    .portfolio-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border-mid);
+      margin: 5rem 0;
+    }
+
+    .pstat {
+      background: var(--navy-mid);
+      padding: 2.5rem;
+      text-align: center;
+      transition: background 0.25s ease;
+    }
+
+    .pstat:hover { background: var(--navy-light); }
+
+    .pstat-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .pstat-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .portfolio-body { padding: 3rem 2rem; }
+      .featured-project { grid-template-columns: 1fr; }
+      .featured-project-visual { min-height: 220px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .portfolio-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <header class="page-header" data-title="Work">
+    <div class="page-eyebrow">03 / Portfolio</div>
+    <h1 class="page-title">Selected <em>Projects</em></h1>
+    <p class="page-subtitle">Enterprise-scale work spanning data pipelines, virtualization infrastructure, and systems automation.</p>
+  </header>
+
+  <main class="portfolio-body">
+
+    <!-- PORTFOLIO STATS -->
+    <div class="portfolio-stats">
+      <div class="pstat">
+        <div class="pstat-num">20+</div>
+        <div class="pstat-label">Years of Projects</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-num">30%</div>
+        <div class="pstat-label">Workload Reduction via Automation</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-num">99.9%</div>
+        <div class="pstat-label">Server Uptime Maintained</div>
+      </div>
+      <div class="pstat">
+        <div class="pstat-num">1000s</div>
+        <div class="pstat-label">VMs Managed at IBM</div>
+      </div>
+    </div>
+
+    <!-- FEATURED PROJECT -->
+    <div class="section-label" style="margin-bottom: 1.5rem;">Featured</div>
+    <div class="featured-project">
+      <div class="featured-project-visual">
+        <span class="featured-project-icon">📊</span>
+      </div>
+      <div class="featured-project-content">
+        <span class="proj-badge">Featured Project</span>
+        <h3>Scalable Enterprise Data Pipelines</h3>
+        <p>Designed and implemented enterprise-scale data pipelines for data marts and warehouses using SSIS, SQL Server, and stored procedures to meet complex business requirements at Veterans United. Led optimization initiatives for data delivery systems and implemented automated testing frameworks to ensure data integrity.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">SSIS</span>
+          <span class="proj-tag">SQL Server</span>
+          <span class="proj-tag">ETL/ELT</span>
+          <span class="proj-tag">Data Marts</span>
+          <span class="proj-tag">Automated Testing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT GRID -->
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-card-icon">☁️</span>
+        <div class="project-card-title">Enterprise Virtualization Infrastructure</div>
+        <div class="project-card-desc">Architected and maintained VMware virtualization environments at IBM supporting thousands of VMs, including design of high availability and disaster recovery solutions.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">VMware</span>
+          <span class="proj-tag">vSphere</span>
+          <span class="proj-tag">ESXi</span>
+          <span class="proj-tag">HA/DR</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-card-icon">🔐</span>
+        <div class="project-card-title">Server Infrastructure &amp; Security</div>
+        <div class="project-card-desc">Administered enterprise Windows server environments with 99.9% uptime, implemented security hardening, and automated maintenance tasks reducing manual workload by 30%.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Windows Server</span>
+          <span class="proj-tag">Security</span>
+          <span class="proj-tag">PowerShell</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-card-icon">🤖</span>
+        <div class="project-card-title">Data Science &amp; Machine Learning</div>
+        <div class="project-card-desc">Applied machine learning techniques and big data analytics to complex business problems. Expertise in Python, R, and advanced statistical modeling with focus on data governance.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Machine Learning</span>
+          <span class="proj-tag">R</span>
+          <span class="proj-tag">Analytics</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-card-icon">⚙️</span>
+        <div class="project-card-title">Data Optimization Initiatives</div>
+        <div class="project-card-desc">Led optimization initiatives for data delivery systems, implemented automated testing systems, and developed comprehensive technical documentation for enterprise teams.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Optimization</span>
+          <span class="proj-tag">Testing</span>
+          <span class="proj-tag">Documentation</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-card-icon">🏢</span>
+        <div class="project-card-title">Enterprise Systems Architecture</div>
+        <div class="project-card-desc">Collaborated on enterprise architecture design for secure server infrastructure, Active Directory management, and integrated storage solutions supporting mission-critical operations.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Architecture</span>
+          <span class="proj-tag">Active Directory</span>
+          <span class="proj-tag">SAN</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-card-icon">🌐</span>
+        <div class="project-card-title">Network &amp; Security Infrastructure</div>
+        <div class="project-card-desc">Implemented and maintained Windows server-based networks, configured Active Directory, and maintained network infrastructure including firewalls and intrusion detection systems.</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Networking</span>
+          <span class="proj-tag">Firewalls</span>
+          <span class="proj-tag">IDS/IPS</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 4rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+      <a href="experience.html" class="btn-primary">View Career Timeline →</a>
+      <a href="contact.html" class="btn-ghost">Discuss a Project</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
+        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — James Simelus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .contact-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem;
+    }
+
+    /* ─── LAYOUT ───────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    /* ─── CONTACT INFO ─────────────────────────── */
+    .contact-info h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .contact-info h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .contact-info p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-mid);
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.8rem 2rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-method:last-child { border-bottom: none; }
+
+    .contact-method::after {
+      content: '→';
+      position: absolute;
+      right: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.3s ease;
+    }
+
+    .contact-method:hover { background: var(--navy-light); }
+    .contact-method:hover::after { opacity: 1; transform: translateX(0); }
+
+    .contact-method-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: background 0.25s ease;
+    }
+
+    .contact-method:hover .contact-method-icon {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--gold-dim);
+    }
+
+    .contact-method-text {}
+
+    .contact-method-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-method-value {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--cream);
+    }
+
+    /* ─── INTERESTS SECTION ────────────────────── */
+    .contact-interests {
+      margin-top: 3rem;
+      border: 1px solid var(--border-mid);
+      padding: 2rem;
+    }
+
+    .contact-interests-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .interest-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .interest-item {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .interest-item::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ─── FORM ─────────────────────────────────── */
+    .contact-form-wrap {}
+
+    .contact-form-wrap h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-form-wrap p {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group:last-child { margin-bottom: 0; }
+
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .form-input,
+    .form-textarea {
+      background: var(--navy-light);
+      border: 1px solid var(--border-mid);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      padding: 0.9rem 1.2rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.25s ease;
+      width: 100%;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--gold-dim);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-submit {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .form-note {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ─── AVAILABILITY BADGE ───────────────────── */
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 1.5rem;
+      border: 1px solid rgba(100, 200, 100, 0.2);
+      background: rgba(50, 150, 50, 0.06);
+      margin-bottom: 2rem;
+      border-radius: 2px;
+    }
+
+    .avail-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(74, 222, 128, 0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .avail-text {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: #4ade80;
+    }
+
+    @media (max-width: 900px) {
+      .contact-body { padding: 3rem 2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <header class="page-header" data-title="Hello">
+    <div class="page-eyebrow">05 / Contact</div>
+    <h1 class="page-title">Get In <em>Touch</em></h1>
+    <p class="page-subtitle">Open to Data Science and Data Engineering opportunities, infrastructure projects, and innovative data solutions.</p>
+  </header>
+
+  <main class="contact-body">
+    <div class="contact-grid">
+
+      <!-- LEFT -->
+      <div class="contact-info">
+        <div class="availability">
+          <div class="avail-dot"></div>
+          <div class="avail-text">Open to new opportunities</div>
+        </div>
+
+        <h2>Let's Build<br><em>Something Great</em></h2>
+        <p>Whether you're looking for a data engineer to architect your next pipeline, an infrastructure specialist to optimize your systems, or a collaborator on innovative data projects — I'd love to connect.</p>
+
+        <div class="contact-methods">
+          <a href="mailto:jsimelus@me.com" class="contact-method">
+            <div class="contact-method-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-method-text">
+              <div class="contact-method-label">Email</div>
+              <div class="contact-method-value">jsimelus@me.com</div>
+            </div>
+          </a>
+          <a href="tel:+15736390614" class="contact-method">
+            <div class="contact-method-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-method-text">
+              <div class="contact-method-label">Phone</div>
+              <div class="contact-method-value">+1 (573) 639-0614</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/james-simelus" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><i class="fab fa-linkedin"></i></div>
+            <div class="contact-method-text">
+              <div class="contact-method-label">LinkedIn</div>
+              <div class="contact-method-value">in/james-simelus</div>
+            </div>
+          </a>
+          <a href="https://github.com/jsimelus1" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><i class="fab fa-github"></i></div>
+            <div class="contact-method-text">
+              <div class="contact-method-label">GitHub</div>
+              <div class="contact-method-value">github.com/jsimelus1</div>
+            </div>
+          </a>
+          <a href="https://gitlab.com/velocity1335012/" target="_blank" class="contact-method">
+            <div class="contact-method-icon"><i class="fab fa-gitlab"></i></div>
+            <div class="contact-method-text">
+              <div class="contact-method-label">GitLab</div>
+              <div class="contact-method-value">gitlab.com/velocity1335012</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-interests">
+          <div class="contact-interests-title">Areas of Interest</div>
+          <div class="interest-list">
+            <div class="interest-item">Data Scientist &amp; Data Engineering roles</div>
+            <div class="interest-item">Enterprise infrastructure projects</div>
+            <div class="interest-item">Innovative data pipeline architecture</div>
+            <div class="interest-item">ML &amp; analytics consulting</div>
+            <div class="interest-item">Health Informatics &amp; GIS applications</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="contact-form-wrap">
+        <h3>Send a Message</h3>
+        <p>I typically respond within 24 hours.</p>
+
+        <form action="mailto:jsimelus@me.com" method="POST" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="fname">First Name</label>
+              <input class="form-input" type="text" id="fname" name="First Name" placeholder="Jane">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lname">Last Name</label>
+              <input class="form-input" type="text" id="lname" name="Last Name" placeholder="Smith">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" name="Email" placeholder="jane@company.com">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input class="form-input" type="text" id="subject" name="Subject" placeholder="Data Engineering Opportunity">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="Message" placeholder="Tell me about your project or opportunity..."></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-primary">Send Message →</button>
+            <span class="form-note">Or email directly</span>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
+        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>

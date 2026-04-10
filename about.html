@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — James Simelus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ─── ABOUT LAYOUT ─────────────────────────── */
+    .about-body {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem 5rem;
+    }
+
+    .about-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+      margin-bottom: 6rem;
+    }
+
+    .about-photo-wrap {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .about-photo-frame {
+      position: relative;
+    }
+
+    .about-photo-frame img {
+      width: 100%;
+      display: block;
+      border-radius: 2px;
+      filter: grayscale(15%);
+    }
+
+    .about-photo-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      width: 60%;
+      height: 60%;
+      border: 2px solid var(--gold-dim);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .about-photo-caption {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-mid);
+    }
+
+    .about-photo-caption h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--cream);
+      margin-bottom: 0.3rem;
+    }
+
+    .about-photo-caption p {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .about-photo-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .about-photo-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .about-photo-links a:hover { color: var(--gold); }
+
+    /* ─── NARRATIVE ─────────────────────────────── */
+    .about-narrative h2 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-narrative h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .about-narrative p {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--muted-mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-narrative p strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ─── ERA CARDS ─────────────────────────────── */
+    .era-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border-mid);
+      margin: 3rem 0;
+    }
+
+    .era-card {
+      background: var(--navy-light);
+      padding: 2.5rem 2rem;
+    }
+
+    .era-card-period {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .era-card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+
+    .era-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── EDUCATION ─────────────────────────────── */
+    .education-section {
+      border-top: 1px solid var(--border-mid);
+      padding-top: 5rem;
+      margin-top: 2rem;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .edu-card {
+      border: 1px solid var(--border-mid);
+      padding: 2.5rem;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.4s ease;
+    }
+
+    .edu-card:hover { border-color: var(--gold-dim); }
+    .edu-card:hover::before { height: 100%; }
+
+    .edu-degree {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-school {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-detail {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .edu-gpa {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .about-body { padding: 3rem 2rem; }
+      .about-intro-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-wrap { position: static; }
+      .era-cards { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">JS<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Let's Talk →</a>
+    </div>
+  </nav>
+
+  <header class="page-header" data-title="About">
+    <div class="page-eyebrow">01 / About</div>
+    <h1 class="page-title">The <em>Story</em></h1>
+    <p class="page-subtitle">Two decades at the intersection of infrastructure, data, and innovation — a strategic career built with purpose.</p>
+  </header>
+
+  <main class="about-body">
+    <div class="about-intro-grid">
+
+      <!-- LEFT: Photo + quick info -->
+      <div class="about-photo-wrap">
+        <div class="about-photo-frame">
+          <img src="headshot.jpg" alt="James Simelus">
+        </div>
+        <div class="about-photo-caption">
+          <h3>James Simelus</h3>
+          <p>Data Engineer · IT Systems Architect</p>
+          <div class="about-photo-links">
+            <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+15736390614"><i class="fas fa-phone"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Narrative -->
+      <div class="about-narrative">
+        <div class="section-label">Professional Profile</div>
+        <h2>Infrastructure Depth.<br><em>Data Ambition.</em></h2>
+
+        <p>I'm a Data Engineer and IT professional with over <strong>20 years of progressive experience</strong> designing, implementing, and optimizing enterprise-scale infrastructure and data solutions. My career represents a strategic evolution — transitioning from foundational systems administration into cutting-edge data engineering, creating a unique bridge between operational excellence and data-driven innovation.</p>
+
+        <p>My distinctive career trajectory, combining deep infrastructure knowledge with modern data engineering skills and formal data science education, allows me to architect solutions that are not only technically sound but <strong>operationally sustainable</strong>. I'm passionate about leveraging technology to transform raw data into strategic business insights.</p>
+
+        <p>In the near future, I plan to pursue a Doctorate degree — likely in Health Informatics or GIS — continuing a lifelong commitment to academic excellence and applied research.</p>
+
+        <div class="era-cards">
+          <div class="era-card">
+            <div class="era-card-period">2005 – 2013</div>
+            <div class="era-card-title">Early Foundation</div>
+            <div class="era-card-desc">Infrastructure management, network administration, enterprise architecture, and VMware virtualization at IBM.</div>
+          </div>
+          <div class="era-card">
+            <div class="era-card-period">2013 – 2021</div>
+            <div class="era-card-title">Infrastructure Leadership</div>
+            <div class="era-card-desc">Enterprise virtualization design, automated provisioning, security hardening, and disaster recovery at IBM and Veterans United.</div>
+          </div>
+          <div class="era-card">
+            <div class="era-card-period">2021 – Present</div>
+            <div class="era-card-title">Data Engineering</div>
+            <div class="era-card-desc">Scalable ETL pipelines, SSIS data marts, SQL optimization, automated testing, and data governance at Veterans United.</div>
+          </div>
+        </div>
+
+        <p>My systems administration background provides invaluable context for building robust, scalable data pipelines. I now design and implement enterprise-scale ETL processes using SQL Server Integration Services (SSIS), sophisticated pipelines connecting multiple enterprise systems, data warehouse and data mart architecture aligned with business requirements, and advanced SQL optimization with complex stored procedures.</p>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="education-section">
+      <div class="section-label">Academic Background</div>
+      <h2 style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--cream); margin-top: 0.5rem;">Education &amp; <em style="font-style:italic; color:var(--gold);">Credentials</em></h2>
+
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">M.S. Data Science &amp; Analytics</div>
+          <div class="edu-school">University of Missouri · May 2025</div>
+          <div class="edu-detail">Advanced machine learning, statistical modeling, big data technologies, distributed systems, data visualization, and cloud computing platforms.</div>
+          <div class="edu-gpa">GPA 3.94 / 4.0</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.S. Information Technology</div>
+          <div class="edu-school">American Intercontinental University · 2004</div>
+          <div class="edu-detail">Foundation in systems administration, network infrastructure, and enterprise IT architecture.</div>
+          <div class="edu-gpa">GPA 3.14 / 4.0</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <a href="skills.html" class="btn-primary">View My Skills →</a>
+        <a href="experience.html" class="btn-ghost">See My Career</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div class="nav-logo" style="margin-bottom:0.5rem;">JS<span>.</span></div>
+        <p>James Simelus · Data Engineer & Systems Architect · Columbia, MO</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/james-simelus" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/jsimelus1" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:jsimelus@me.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
+  </footer>
+
+  <script src="shared.js"></script>
+</body>
+</html>
