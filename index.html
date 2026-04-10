@@ -242,5 +242,40 @@
     <div class="footer-copy">© <span id="yr"></span> James Simelus. All rights reserved.</div>
   </footer>
   <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+
+  <script>
+    // Set active nav link based on current page
+    (function(){
+      var page = window.location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('.nav-links a, .nav-drawer-links a').forEach(function(a){
+        if (a.getAttribute('href') === page) a.classList.add('active');
+      });
+    })();
+
+    // Hamburger menu
+    var hamburger = document.getElementById('hamburger');
+    var drawer    = document.getElementById('navDrawer');
+    var backdrop  = document.getElementById('drawerBackdrop');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      hamburger.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    });
+    backdrop.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.nav-drawer-links a').forEach(function(a){
+      a.addEventListener('click', closeDrawer);
+    });
+  </script>
 </body>
 </html>
